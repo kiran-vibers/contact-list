@@ -1,0 +1,61 @@
+<div class="p-5">
+  <div class="row mb-2">
+    <h1 class="col-10">Contact List</h1>
+    <button
+      class="btn btn-primary col-2"
+      type="button"
+      (click)="editContact(null)"
+    >
+      Add
+    </button>
+  </div>
+
+  <div
+    *ngFor="
+      let contact of contactListArr;
+      let i = index;
+      trackBy: trackContactById
+    "
+    class="p-3 border mb-3 rounded"
+  >
+    <div
+      class="row view-contact-container"
+      *ngIf="!showEditForm || contact.id !== selectedContact?.id"
+    >
+      <div class="col-1">Id:</div>
+      <div class="col-8">{{ contact.id }}.</div>
+      <div class="col-3">
+        <button
+          class="btn btn-primary mx-2"
+          type="button"
+          (click)="editContact(contact)"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="deleteContact(contact)"
+        >
+          Delete
+        </button>
+      </div>
+
+      <div class="col-1">Name:</div>
+      <div class="col-11">{{ contact.firstName }} {{ contact.lastName }}</div>
+      <div class="col-1">Phone:</div>
+      <div class="col-11">
+        {{ contact.phone }}
+      </div>
+    </div>
+    <app-add-edit-contact-form
+      (saveContact)="onContactSave($event)"
+      [contact]="selectedContact"
+      *ngIf="showEditForm && contact.id === selectedContact?.id"
+    ></app-add-edit-contact-form>
+  </div>
+  <app-add-edit-contact-form
+    (saveContact)="onContactSave($event)"
+    *ngIf="showEditForm && !selectedContact"
+  ></app-add-edit-contact-form>
+</div>

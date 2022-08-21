@@ -1,0 +1,24 @@
+<div [formGroup]="contactForm">
+  <div class="firstName row">
+    <label class="col-2">First Name</label>
+    <input class="col-4" type="text" formControlName="firstName" />
+  </div>
+  <div class="lastName row">
+    <label class="col-2">Last Name</label>
+    <input class="col-4" type="text" formControlName="lastName" />
+  </div>
+  <div class="phone row">
+    <label class="col-2">Phone</label>
+    <input class="col-4" type="text" formControlName="phone" />
+  </div>
+  <div>
+    <button
+      class="btn btn-primary mx-2"
+      type="button"
+      (click)="onSaveContact()"
+      [disabled]="!contactForm.valid"
+    >
+      Save
+    </button>
+  </div>
+</div>
